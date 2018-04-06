@@ -1,8 +1,9 @@
 # Ignoring the following files
 
-# Data folder
-/data
+# Data
+/GTD
+globalterrorismdb_0617dist.xlsx
+
 
 # Project related
-todo.txt
-challenge_description.md
+Call_Schedule_and_Todo.md
