@@ -3,10 +3,9 @@
 # Data
 /GTD
 globalterrorismdb_0617dist.xlsx
-*.csv
-*.xlsx
-
-
+gtd.csv
+moddat.csv
+sample.xlsx
 
 # Project related
 Call_Schedule_and_Todo.md
