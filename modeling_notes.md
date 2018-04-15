@@ -60,5 +60,3 @@ Danger of overfitting:
 * Balance the dataset
     - Sample an equal number of samples from each class
     - Normalize sample weights for each class with `sample_weight`.
-
-# Performance metrics
