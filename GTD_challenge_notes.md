@@ -37,6 +37,13 @@ Domain similarity: Other violent but non-terrorist acts
 * Ethnographic approach: Interviewing perpetartors and their peers to gain knowledge about the story of their terrorist projects. What were their motivations, what were their aims, what circumstances did they have to follow, what practicalities did they need to attend?
 * Macrosociological approach: Examining the actual socio-economic patterns within the region preceding the terrorist acts and the material-technological circumstances with which the perpetrators needed to work with.
 
+# Multiclass classification problem
+Also see:
+* http://gen.lib.rus.ec/book/index.php?md5=7D9A914B11899C853D5CF1DB8361CB83
+* http://gen.lib.rus.ec/book/index.php?md5=9880D6720C107975994348750F4E2495
+* https://www.analyticsvidhya.com/blog/2017/08/introduction-to-multi-label-classification/
+* http://scikit-learn.org/stable/modules/multiclass.html
+
 # The Data
 The project examines the following dataset:
 > National Consortium for the Study of Terrorism and Responses to Terrorism (START). (2016). Global Terrorism Database [Data file]. Retrieved from https://www.start.umd.edu/gtd

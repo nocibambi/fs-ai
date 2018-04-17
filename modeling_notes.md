@@ -1,9 +1,4 @@
 # Multi-class and multi-label classification
-Also see:
-* http://gen.lib.rus.ec/book/index.php?md5=7D9A914B11899C853D5CF1DB8361CB83
-* http://gen.lib.rus.ec/book/index.php?md5=9880D6720C107975994348750F4E2495
-* https://www.analyticsvidhya.com/blog/2017/08/introduction-to-multi-label-classification/
-* http://scikit-learn.org/stable/modules/multiclass.html
 
 ## Types
 Multi-class classification:
