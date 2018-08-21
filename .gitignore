@@ -1,9 +1,13 @@
 # Ignoring the following files
 
 # Data
+/notebook/input
 /GTD
 *.csv
 *.xlsx
 
-# Task management related
+# Task management
 /notes
+
+# Kaggle admin
+kernel-metadata.json

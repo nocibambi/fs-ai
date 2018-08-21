@@ -1,0 +1,9 @@
+[{
+  "data": "/opt/conda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88\n  return f(*args, **kwds)\n/opt/conda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88\n  return f(*args, **kwds)\n[NbConvertApp] Converting notebook script.ipynb to html\n",
+  "stream_name": "stderr",
+  "time": 5.281364071997814
+},{
+  "data": "[NbConvertApp] Executing notebook with kernel: python3\n",
+  "stream_name": "stderr",
+  "time": 5.450721315981355
+}]
