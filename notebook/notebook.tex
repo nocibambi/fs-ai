@@ -1,0 +1,2162 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Y\_trans\_ppl}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Introduction}\label{introduction}
+
+In this notebook I attempted to create a Wrapper class around the
+different customer transformer wrappers with the hope of making them
+possible to pass on 'y' within grid search and therefore to also allow
+to include label transformation into the preprocessing/modeling
+workflow. I do this as part of my attempt to reproduce the results of
+the followig paper. \href{pred-gtd.ipynb}{You can see the main project
+notebook here}.
+
+\subsection{CHRIST University}\label{christ-university}
+
+\begin{quote}
+D. Talreja, J. Nagaraj, N. J. Varsha and K. Mahesh, "Terrorism
+analytics: Learning to predict the perpetrator," 2017 International
+Conference on Advances in Computing, Communications and Informatics
+(ICACCI), Udupi, 2017, pp. 1723-1726. doi: 10.1109/ICACCI.2017.8126092
+\end{quote}
+
+I did not manage to work it out, although it managed to maket it go
+through a pipeline (in most of the time)
+
+    \section{Libraries}\label{libraries}
+
+    \subsection{Fundamentals}\label{fundamentals}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{clear}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \subsection{Preprocessing}\label{preprocessing}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+        \PY{k+kn}{from} \PY{n+nn}{imblearn}\PY{n+nn}{.}\PY{n+nn}{over\PYZus{}sampling} \PY{k}{import} \PY{n}{SMOTE}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{sparse} \PY{k}{import} \PY{n}{csr\PYZus{}matrix}
+\end{Verbatim}
+
+
+    \subsection{Cross validation}\label{cross-validation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{,} \PY{n}{KFold}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{,} \PY{n}{cross\PYZus{}validate}\PY{p}{,} \PY{n}{StratifiedKFold}\PY{p}{,} \PY{n}{StratifiedShuffleSplit}
+\end{Verbatim}
+
+
+    \subsection{Models}\label{models}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{naive\PYZus{}bayes} \PY{k}{import} \PY{n}{GaussianNB}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{discriminant\PYZus{}analysis} \PY{k}{import} \PY{n}{LinearDiscriminantAnalysis}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+        \PY{c+c1}{\PYZsh{}from sklearn.linear\PYZus{}model import LogisticRegression}
+\end{Verbatim}
+
+
+    \subsection{Metrics}\label{metrics}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}\PY{p}{,} \PY{n}{precision\PYZus{}score}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{,} \PY{n}{roc\PYZus{}auc\PYZus{}score}
+\end{Verbatim}
+
+
+    \subsection{Memory management}\label{memory-management}
+
+\subsubsection{Setting the temp folder}\label{setting-the-temp-folder}
+
+This is required for "jobs=-1" to work on Kaggle at some cases (see
+https://www.kaggle.com/getting-started/45288\#292143)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{o}{\PYZpc{}}\PY{k}{env} JOBLIB\PYZus{}TEMP\PYZus{}FOLDER=/tmp
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+env: JOBLIB\_TEMP\_FOLDER=/tmp
+
+    \end{Verbatim}
+
+    \subsection{Garbage collector}\label{garbage-collector}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{gc}
+\end{Verbatim}
+
+
+    \section{Loading the data}\label{loading-the-data}
+
+    Previously we loaded the data and created a sample out of it. From now
+on we are going to use it for our analysis and modeling.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Instead of the excel from their homepage, I use the csv version they uploaded to Kaggle}
+        \PY{c+c1}{\PYZsh{}gtd = pd.read\PYZus{}excel(\PYZdq{}globalterrorismdb\PYZus{}0617dist.xlsx\PYZdq{})}
+        \PY{n}{gtd} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../input/globalterrorismdb\PYZus{}0617dist.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/andras/anaconda3/lib/python3.6/site-packages/IPython/core/interactiveshell.py:2785: DtypeWarning: Columns (4,6,31,33,53,61,62,63,76,79,90,92,94,96,114,115,121) have mixed types. Specify dtype option on import or set low\_memory=False.
+  interactivity=interactivity, compiler=compiler, result=result)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} In case we want to use a sample}
+         \PY{c+c1}{\PYZsh{} gtd\PYZus{}ori = gtd}
+         \PY{n}{gtd} \PY{o}{=} \PY{n}{gtd}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Recreating the CHRIST paper by using a
+pipeline}\label{recreating-the-christ-paper-by-using-a-pipeline}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{Pipeline}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{base} \PY{k}{import} \PY{n}{TransformerMixin} \PY{p}{,} \PY{n}{BaseEstimator}
+\end{Verbatim}
+
+
+    The authors of the paper trained and tested the model on a subsample of
+the whole dataset, namely: * Between 1970-2015 * Incidents related to
+India * Cases to which the dataset attributes a perpetrator group
+
+They also preselected a number of features for the model.
+
+    \section{Building the pipeline}\label{building-the-pipeline}
+
+    \subsection{Description of steps}\label{description-of-steps}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Selecting samples
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  from India
+\item
+  between 1970 and 2015
+\item
+  those of which have known perpetartors
+\item
+  those of which belong to perpetrators with at least two connected
+  incidents
+\end{itemize}
+
+Affects the whole training dataset (both X and Y).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Selecting columns
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  'iyear'
+\item
+  'imonth'
+\item
+  'iday'
+\item
+  'extended'
+\item
+  'provstate'
+\item
+  'city'
+\item
+  'attacktype1\_txt'
+\item
+  'targtype1\_txt'
+\item
+  'nperps'
+\item
+  'weaptype1\_txt'
+\item
+  'nkill'
+\item
+  'nwound'
+\item
+  'nhostkid'
+\end{itemize}
+
+Affects only the training attributes.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Creating a new attribute from the following three:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  'nkill'
+\item
+  'nwound'
+\item
+  'nhostkid'
+\end{itemize}
+
+Affects only the training attributes.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Converting the categorical attributes into binary form
+\item
+  Converting the target labels into binary form
+\item
+  Converting both the attributes and labels to sparse matrices
+\item
+  Rebalancing the dataset based on the target classes
+\item
+  Running the model
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{steps\PYZus{}in\PYZus{}val\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Set location}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Set period}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Only known samples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Only groups with more than 1 incident}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feature seleciton}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New feature creation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Binarizing X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Binarize y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Transfrom X to sparse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Transform y to sparse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMOTE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Affects model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{n}{steps\PYZus{}in\PYZus{}val} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{steps\PYZus{}in\PYZus{}val\PYZus{}dict}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+        \PY{n}{steps\PYZus{}in\PYZus{}val}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}                                       train\_x train\_y           test\_x  \textbackslash{}
+        Set location                                1       1  Affects results   
+        Set period                                  1       1  Affects results   
+        Only known samples                          1       1  Affects results   
+        Only groups with more than 1 incident       1       1  Affects results   
+        Feature seleciton                           1       0                1   
+        New feature creation                        1       0                0   
+        Binarizing X                                1       0                1   
+        Binarize y                                  0       1                0   
+        Transfrom X to sparse                       1       0                1   
+        Transform y to sparse                       0       1                0   
+        SMOTE                                       1       1    Affects model   
+        
+                                                        test\_y  
+        Set location                           Affects results  
+        Set period                             Affects results  
+        Only known samples                     Affects results  
+        Only groups with more than 1 incident  Affects results  
+        Feature seleciton                                    0  
+        New feature creation                                 0  
+        Binarizing X                                         0  
+        Binarize y                                           1  
+        Transfrom X to sparse                                0  
+        Transform y to sparse                                1  
+        SMOTE                                    Affects model  
+\end{Verbatim}
+            
+    \subsection{Custom transformers}\label{custom-transformers}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{showXy}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}This is a small helper function allowing me to see the shape of X an y in the Custom Transformers.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    I takse only X and y and prints them (or the elements of X if it is a tuple)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n+nb}{tuple}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X[0].shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X[1].shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X.shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{,} \PY{n+nb}{tuple}\PY{p}{,} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{,} \PY{n+nb}{int}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y.shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{}print(\PYZdq{}self.y.shape: \PYZob{}\PYZcb{}\PYZdq{}.format(self.y.shape))}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{class} \PY{n+nc}{TransWrap}\PY{p}{(}\PY{n}{TransformerMixin}\PY{p}{,} \PY{n}{BaseEstimator}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}The wrapper class I try to use to also include \PYZsq{}y\PYZsq{} information into the pipeline.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{transformer}\PY{p}{,} \PY{n}{ytrans}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{trans} \PY{o}{=} \PY{n}{transformer} \PY{c+c1}{\PYZsh{} The transformer class}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ytrans} \PY{o}{=} \PY{n}{ytrans} \PY{c+c1}{\PYZsh{} A parameter to identify \PYZsq{}y\PYZhy{}transform\PYZsq{} classes}
+                 
+                 \PY{c+c1}{\PYZsh{} A list of possible actions it uses for deciding what to do under \PYZsq{}transform\PYZsq{}}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{actions} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{transform}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{params}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{TransWrap fit START}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{showXy}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{c+c1}{\PYZsh{} I save y to reuse this value under \PYZsq{}transform\PYZsq{}}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{self.y.shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+              
+                 \PY{c+c1}{\PYZsh{} This is where it distributes the incoming X value}
+                 \PY{c+c1}{\PYZsh{} which is possilby a tuple containing \PYZsq{}y\PYZsq{}}
+                 \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n+nb}{tuple}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{X}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{trans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{trans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                 
+                 \PY{k}{return} \PY{n+nb+bp}{self}
+         
+             \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} This is simply a predict function}
+         \PY{l+s+sd}{        which just intermediates the wrapper and the model}
+         \PY{l+s+sd}{        with the actual predict method.}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}
+                 
+                 \PY{c+c1}{\PYZsh{} X distribution}
+                 \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n+nb}{tuple}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{X}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                 
+                 \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{trans}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             
+             \PY{k}{def} \PY{n+nf}{predict\PYZus{}proba}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Like above with predict}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}
+                 \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{trans}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             
+             \PY{k}{def} \PY{n+nf}{transform}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}The transform function}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{TransWrap transform START}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{showXy}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{c+c1}{\PYZsh{}y}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{self.y.shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Defining y based on the value stored in \PYZsq{}fit\PYZsq{} or}
+                 \PY{c+c1}{\PYZsh{} at another place}
+                 \PY{c+c1}{\PYZsh{} (How this works is quite unclear for me)}
+                 \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}
+                 
+                 \PY{c+c1}{\PYZsh{} X distribution}
+                 \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n+nb}{tuple}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                     \PY{c+c1}{\PYZsh{}self.y = y}
+                 
+                 \PY{c+c1}{\PYZsh{} Action selector (e.g. some models do not }
+                 \PY{c+c1}{\PYZsh{} have transform but predict or sample)}
+                 \PY{c+c1}{\PYZsh{} It is very simple and relies on the list of actions under }
+                 \PY{c+c1}{\PYZsh{} \PYZus{}\PYZus{}init\PYZus{}\PYZus{}}
+                 \PY{k}{def} \PY{n+nf}{select\PYZus{}action}\PY{p}{(}\PY{n}{actions}\PY{p}{,} \PY{n}{l}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{actions}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                         \PY{k}{if} \PY{n}{actions}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{in} \PY{n+nb}{dir}\PY{p}{(}\PY{n}{l}\PY{p}{)}\PY{p}{:}
+                             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Action: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{l}\PY{p}{,} \PY{n}{actions}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                             \PY{k}{return} \PY{n}{actions}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                         \PY{k}{return} \PY{n}{select\PYZus{}action}\PY{p}{(}\PY{n}{actions}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{l}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Transformer action is not within defined options.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                         \PY{k}{return} \PY{k+kc}{None}
+                 
+                 \PY{c+c1}{\PYZsh{} Executing the action}
+                 \PY{n}{action} \PY{o}{=} \PY{n}{select\PYZus{}action}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{actions}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{trans}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} In case the class is a \PYZsq{}y\PYZhy{}transform\PYZsq{}}
+                 \PY{c+c1}{\PYZsh{} that is, it also affects the labels}
+                 \PY{c+c1}{\PYZsh{} we expect two values from it}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ytrans}\PY{p}{:}
+                     \PY{n}{showXy}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                     \PY{n}{new\PYZus{}X}\PY{p}{,} \PY{n}{new\PYZus{}y} \PY{o}{=} \PY{n+nb}{getattr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{trans}\PY{p}{,} \PY{n}{action}\PY{p}{)}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} From normal classes we get only a single valeu}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{new\PYZus{}X} \PY{o}{=} \PY{n+nb}{getattr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{trans}\PY{p}{,} \PY{n}{action}\PY{p}{)}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                     \PY{n}{new\PYZus{}y} \PY{o}{=} \PY{n}{y}
+                     
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TransWrap transform END}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{new\PYZus{}X.shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{new\PYZus{}X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{new\PYZus{}y.shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{new\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{k}{return} \PY{n}{new\PYZus{}X}\PY{p}{,} \PY{n}{new\PYZus{}y}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{class} \PY{n+nc}{CodeMergeNaff}\PY{p}{(}\PY{n}{TransformerMixin}\PY{p}{,} \PY{n}{BaseEstimator}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}In this transformer I tried to implement a function which creates a new column from three other by}
+         \PY{l+s+sd}{    1. binning them}
+         \PY{l+s+sd}{    2. ascribing a code to each bin (and the code \PYZsq{}n\PYZsq{} for zeros)}
+         \PY{l+s+sd}{    3. concatenating the codes into a single class for each combination}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    In the [main notebook](pred\PYZhy{}gtd.ipynb), I developed it as a function (`naf()`)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{col\PYZus{}bins\PYZus{}codes}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cbc} \PY{o}{=} \PY{n}{col\PYZus{}bins\PYZus{}codes}
+                 
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb+bp}{self}
+         
+             \PY{k}{def} \PY{n+nf}{naff}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{crits}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}The eactual function creating the transformation}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{n} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{crits}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{crits}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{i} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{key}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         
+                     \PY{n}{i}\PY{p}{[}\PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{key}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}
+                     \PY{n}{i}\PY{p}{[}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{key}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)} 
+                       \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{key}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{crits}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{crits}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+                     \PY{n}{i}\PY{p}{[}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{key}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{crits}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} 
+                       \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{key}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{crits}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{crits}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                     \PY{n}{i}\PY{p}{[}\PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{key}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{crits}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{crits}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                     
+                     \PY{n}{n} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                     
+                 \PY{n}{n}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+                 \PY{k}{return} \PY{n}{n}
+             
+             \PY{k}{def} \PY{n+nf}{transform}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{CodeMergeNaff transform START}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 
+                 \PY{n}{naffect} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{naff}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cbc}\PY{p}{)}
+                 
+                 \PY{n}{naffect}\PY{o}{.}\PY{n}{nhostkid}\PY{p}{[}\PY{n}{naffect}\PY{o}{.}\PY{n}{nhostkid} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{99}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{NaN}
+                 \PY{n}{naffect}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{NaN}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{naffect} \PY{o}{=} \PY{n}{naffect}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+}  \PY{n}{naffect}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+}  \PY{n}{naffect}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}
+                 
+                 \PY{n}{X}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nkill}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nwound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nhostkid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{X}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{naffect}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{naffect}
+         
+                 \PY{n}{X}\PY{o}{.}\PY{n}{nperps}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{nperps} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{99}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{X}\PY{o}{.}\PY{n}{nperps}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                 
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CodeMergeNaff transform END}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{X}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{class} \PY{n+nc}{ProcPerf}\PY{p}{(}\PY{n}{TransformerMixin}\PY{p}{,} \PY{n}{BaseEstimator}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Collects a number of preprocessing steps}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{pass}
+             
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb+bp}{self}  
+         
+             \PY{k}{def} \PY{n+nf}{dtypeconv}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Datatype conversion function}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imonth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extended}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imonth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extended}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PYZbs{}
+                                                            \PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{copy}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} 
+                 
+                 \PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iyear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nperps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iyear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nperps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PYZbs{}
+                                                 \PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int16}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{copy}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+                 
+                 \PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{X}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{]} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{]}\PYZbs{}
+                                                                    \PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{copy}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+                 
+                 \PY{k}{return} \PY{n}{X}   
+         
+             \PY{k}{def} \PY{n+nf}{cattobin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Creates dummy features from values in object columns}
+         \PY{l+s+sd}{        and encodes the labels}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{X} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                 \PY{n}{X} \PY{o}{=} \PY{n}{csr\PYZus{}matrix}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+                 \PY{n}{label\PYZus{}encoder} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int16}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{k}{return} \PY{n}{X}\PY{p}{,} \PY{n}{y}
+             
+             \PY{k}{def} \PY{n+nf}{transform}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ProcPerf transform START}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                
+                 \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{c+c1}{\PYZsh{} When you find this in the code you wrote}
+                 
+                 \PY{c+c1}{\PYZsh{} Running the functions}
+                 \PY{n}{X} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dtypeconv}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                 \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cattobin}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                 
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProcPerf transform END}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                        
+                 \PY{k}{return} \PY{n}{X}\PY{p}{,} \PY{n}{y}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{class} \PY{n+nc}{GTDFilter}\PY{p}{(}\PY{n}{TransformerMixin}\PY{p}{,} \PY{n}{BaseEstimator}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Filters the data based on attribute and label values}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{startdate}\PY{p}{,} \PY{n}{enddate}\PY{p}{,} \PY{n}{country}\PY{p}{,} \PY{n}{columns}\PY{p}{,} \PY{n}{onlyknown}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}  \PY{n}{min\PYZus{}inc}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sdate} \PY{o}{=} \PY{n}{startdate} 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{edate} \PY{o}{=} \PY{n}{enddate}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{country} \PY{o}{=} \PY{n}{country}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cols} \PY{o}{=} \PY{n}{columns}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ok} \PY{o}{=} \PY{n}{onlyknown} \PY{c+c1}{\PYZsh{} excluding \PYZsq{}unknown\PYZsq{} labels}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{minc} \PY{o}{=} \PY{n}{min\PYZus{}inc} \PY{c+c1}{\PYZsh{} minimum frequency of the labels included in the dataset}
+                 
+                 \PY{c+c1}{\PYZsh{}print(\PYZdq{}\PYZbs{}nGTDFilter \PYZus{}\PYZus{}init\PYZus{}\PYZus{}\PYZdq{})}
+                 \PY{c+c1}{\PYZsh{}showXy(X, y)}
+             
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{y}
+             
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{GTDFilter fit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{showXy}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{self.y.shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{k}{return} \PY{n+nb+bp}{self}
+                 
+             \PY{k}{def} \PY{n+nf}{transform}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{GTDFilter transform START}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{showXy}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{self.y.shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Dropping \PYZsq{}unknown\PYZsq{} labels}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ok}\PY{p}{:}
+                     \PY{n}{nukcrit} \PY{o}{=} \PY{n}{y} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}
+                     \PY{n}{X} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{nukcrit}\PY{p}{]}
+                     \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{nukcrit}\PY{p}{]}
+         
+                 \PY{c+c1}{\PYZsh{} Filtering the data besed on start and and year and country}
+                 \PY{n}{filcrit} \PY{o}{=} \PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{iyear} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sdate}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{iyear}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PYZbs{}
+                           \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{iyear} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{edate}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{iyear}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PYZbs{}
+                           \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{country\PYZus{}txt} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{India}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{n}{X} \PY{o}{=}  \PY{n}{X}\PY{p}{[}\PY{n}{filcrit}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cols}\PY{p}{]}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{filcrit}\PY{p}{]}
+                 
+                 \PY{c+c1}{\PYZsh{} Dropping labels below the minimum frequency}
+                 \PY{n}{micrit} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)} \PYZbs{}
+                                 \PY{p}{[}\PY{n}{y}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{minc}\PY{p}{]} \PYZbs{}
+                                 \PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+                 
+                 \PY{n}{X} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{micrit}\PY{p}{]}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{micrit}\PY{p}{]}
+                 
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTDFilter transform END}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{showXy}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{self.y.shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+                         
+                 \PY{k}{return} \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{c+c1}{\PYZsh{}self.y\PYZus{}work}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{crits} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nkill}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mi}{62}\PY{p}{,} \PY{l+m+mi}{124}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nwound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mi}{272}\PY{p}{,} \PY{l+m+mi}{544}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{def}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nhostkid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{800}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ghi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \section{The Pipeline}\label{the-pipeline}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{pipe} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}
+             \PY{c+c1}{\PYZsh{} Filter based on year, contry, column names, missing labels and label frequency}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{filter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{TransWrap}\PY{p}{(}
+                 \PY{n}{GTDFilter}\PY{p}{(}\PY{n}{startdate}\PY{o}{=}\PY{l+m+mi}{1970}\PY{p}{,} \PY{n}{enddate}\PY{o}{=}\PY{l+m+mi}{2015}\PY{p}{,} 
+                           \PY{n}{country}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{India}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                           \PY{n}{onlyknown}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                           \PY{n}{columns}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iyear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imonth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extended}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{provstate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{attacktype1\PYZus{}txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{targtype1\PYZus{}txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nperps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weaptype1\PYZus{}txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nkill}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nwound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nhostkid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{min\PYZus{}inc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{ytrans}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{}this is an y\PYZhy{}transform}
+             
+             \PY{c+c1}{\PYZsh{} Feature extractor}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{naffect recoder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{TransWrap}\PY{p}{(}\PY{n}{CodeMergeNaff}\PY{p}{(}\PY{n}{col\PYZus{}bins\PYZus{}codes}\PY{o}{=}\PY{n}{crits}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             
+             \PY{c+c1}{\PYZsh{} Encoder and datatype converter}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perfproc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{TransWrap}\PY{p}{(}\PY{n}{ProcPerf}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{ytrans}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{}this is an y\PYZhy{}transform}
+             \PY{c+c1}{\PYZsh{}(\PYZsq{}smote\PYZsq{}, TransWrap(SMOTE(ratio=\PYZsq{}all\PYZsq{}, k\PYZus{}neighbors=1, n\PYZus{}jobs=\PYZhy{}1), ytrans=True)),}
+             \PY{c+c1}{\PYZsh{}(\PYZsq{}DTC\PYZsq{}, TransWrap(DecisionTreeClassifier())),}
+         \PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{validation\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.2}
+         \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{17}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}validation}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}validation} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{gtd}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gname}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{gtd}\PY{o}{.}\PY{n}{gname}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{n}{validation\PYZus{}size}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{seed}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}validation}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}validation}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(13628, 134)
+(3407, 134)
+(13628,)
+(3407,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{o}{\PYZpc{}}\PY{k}{time}
+         \PY{n}{transX}\PY{p}{,} \PY{n}{transy} \PY{o}{=} \PY{n}{pipe}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 4 µs, sys: 0 ns, total: 4 µs
+Wall time: 11.9 µs
+
+TransWrap fit START
+X.shape: (13628, 134)
+y.shape: (13628,)
+self.y.shape: (13628,)
+
+GTDFilter fit
+X.shape: (13628, 134)
+y.shape: (13628,)
+self.y.shape: (13628,)
+
+TransWrap transform START
+X.shape: (13628, 134)
+self.y.shape: (13628,)
+
+GTDFilter(columns=None, country='India', enddate=None, min\_inc=None,
+     onlyknown=None, startdate=None)
+	Action: transform
+X.shape: (13628, 134)
+y.shape: (13628,)
+
+GTDFilter transform START
+X.shape: (13628, 134)
+y.shape: (13628,)
+self.y.shape: (13628,)
+GTDFilter transform END
+X.shape: (508, 13)
+y.shape: (508,)
+self.y.shape: (13628,)
+TransWrap transform END
+new\_X.shape: (508, 13)
+new\_y.shape: (508,)
+
+TransWrap fit START
+X[0].shape: (508, 13)
+X[1].shape: (508,)
+y.shape: (13628,)
+self.y.shape: (13628,)
+
+TransWrap transform START
+X[0].shape: (508, 13)
+X[1].shape: (508,)
+self.y.shape: (508,)
+
+CodeMergeNaff(col\_bins\_codes=None)
+	Action: transform
+
+CodeMergeNaff transform START
+CodeMergeNaff transform END
+TransWrap transform END
+new\_X.shape: (508, 11)
+new\_y.shape: (508,)
+
+TransWrap fit START
+X[0].shape: (508, 11)
+X[1].shape: (508,)
+y.shape: (13628,)
+self.y.shape: (13628,)
+
+TransWrap transform START
+X[0].shape: (508, 11)
+X[1].shape: (508,)
+self.y.shape: (508,)
+
+ProcPerf()
+	Action: transform
+X.shape: (508, 11)
+y.shape: (508,)
+
+ProcPerf transform START
+ProcPerf transform END
+TransWrap transform END
+new\_X.shape: (508, 433)
+new\_y.shape: (508,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{3}
+         \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{c+c1}{\PYZsh{} max\PYZus{}features = 2500}
+         \PY{n}{X} \PY{o}{=} \PY{n}{gtd}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gname}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{gtd}\PY{o}{.}\PY{n}{gname}
+\end{Verbatim}
+
+
+    And this is where it breaks:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{estimator}\PY{o}{=}\PY{n}{pipe}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{n}{scoring}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{n}{n\PYZus{}jobs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+TransWrap fit START
+X.shape: (11356, 134)
+y.shape: (11356,)
+self.y.shape: (11356,)
+
+TransWrap fit START
+X.shape: (11357, 134)
+y.shape: (11357,)
+self.y.shape: (11357,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        RemoteTraceback                           Traceback (most recent call last)
+
+        RemoteTraceback: 
+    """
+    Traceback (most recent call last):
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/\_parallel\_backends.py", line 350, in \_\_call\_\_
+        return self.func(*args, **kwargs)
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 131, in \_\_call\_\_
+        return [func(*args, **kwargs) for func, args, kwargs in self.items]
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 131, in <listcomp>
+        return [func(*args, **kwargs) for func, args, kwargs in self.items]
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py", line 458, in \_fit\_and\_score
+        estimator.fit(X\_train, y\_train, **fit\_params)
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py", line 248, in fit
+        Xt, fit\_params = self.\_fit(X, y, **fit\_params)
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py", line 213, in \_fit
+        **fit\_params\_steps[name])
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/memory.py", line 362, in \_\_call\_\_
+        return self.func(*args, **kwargs)
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py", line 581, in \_fit\_transform\_one
+        res = transformer.fit\_transform(X, y, **fit\_params)
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/base.py", line 520, in fit\_transform
+        return self.fit(X, y, **fit\_params).transform(X)
+      File "<ipython-input-17-a11be80f2199>", line 25, in fit
+        self.trans.fit(X, y)
+    AttributeError: 'NoneType' object has no attribute 'fit'
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/home/andras/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+        result = (True, func(*args, **kwds))
+      File "/home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/\_parallel\_backends.py", line 359, in \_\_call\_\_
+        raise TransportableException(text, e\_type)
+    sklearn.externals.joblib.my\_exceptions.TransportableException: TransportableException
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+    AttributeError                                     Tue Aug 21 17:06:48 2018
+    PID: 30193                  Python 3.6.6: /home/andras/anaconda3/bin/python
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_\_call\_\_(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+        126     def \_\_init\_\_(self, iterator\_slice):
+        127         self.items = list(iterator\_slice)
+        128         self.\_size = len(self.items)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+            self.items = [(<function \_fit\_and\_score>, (Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]),              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], 155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, \{'score': make\_scorer(accuracy\_score)\}, array([ 5679,  5680,  5681, {\ldots}, 17032, 17033, 17034]), array([   0,    1,    2, {\ldots}, 5676, 5677, 5678]), 0, None, None), \{'return\_times': True, 'return\_train\_score': False\})]
+        132 
+        133     def \_\_len\_\_(self):
+        134         return self.\_size
+        135 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list\_iterator object>)
+        126     def \_\_init\_\_(self, iterator\_slice):
+        127         self.items = list(iterator\_slice)
+        128         self.\_size = len(self.items)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+            func = <function \_fit\_and\_score>
+            args = (Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]),              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], 155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, \{'score': make\_scorer(accuracy\_score)\}, array([ 5679,  5680,  5681, {\ldots}, 17032, 17033, 17034]), array([   0,    1,    2, {\ldots}, 5676, 5677, 5678]), 0, None, None)
+            kwargs = \{'return\_times': True, 'return\_train\_score': False\}
+        132 
+        133     def \_\_len\_\_(self):
+        134         return self.\_size
+        135 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in \_fit\_and\_score(estimator=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], y=155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, scorer=\{'score': make\_scorer(accuracy\_score)\}, train=array([ 5679,  5680,  5681, {\ldots}, 17032, 17033, 17034]), test=array([   0,    1,    2, {\ldots}, 5676, 5677, 5678]), verbose=0, parameters=None, fit\_params=\{\}, return\_train\_score=False, return\_parameters=False, return\_n\_test\_samples=False, return\_times=True, error\_score='raise')
+        453 
+        454     try:
+        455         if y\_train is None:
+        456             estimator.fit(X\_train, **fit\_params)
+        457         else:
+    --> 458             estimator.fit(X\_train, y\_train, **fit\_params)
+            estimator.fit = <bound method Pipeline.fit of Pipeline(memory=No{\ldots}oc', TransWrap(transformer=None, ytrans=True))])>
+            X\_train =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y\_train = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+            fit\_params = \{\}
+        459 
+        460     except Exception as e:
+        461         \# Note fit time as time until error
+        462         fit\_time = time.time() - start\_time
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py in fit(self=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        243         Returns
+        244         -------
+        245         self : Pipeline
+        246             This estimator
+        247         """
+    --> 248         Xt, fit\_params = self.\_fit(X, y, **fit\_params)
+            Xt = undefined
+            fit\_params = \{\}
+            self.\_fit = <bound method Pipeline.\_fit of Pipeline(memory=N{\ldots}oc', TransWrap(transformer=None, ytrans=True))])>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+        249         if self.\_final\_estimator is not None:
+        250             self.\_final\_estimator.fit(Xt, y, **fit\_params)
+        251         return self
+        252 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py in \_fit(self=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        208                 else:
+        209                     cloned\_transformer = clone(transformer)
+        210                 \# Fit or load from cache the current transfomer
+        211                 Xt, fitted\_transformer = fit\_transform\_one\_cached(
+        212                     cloned\_transformer, None, Xt, y,
+    --> 213                     **fit\_params\_steps[name])
+            fit\_params\_steps = \{'filter': \{\}, 'naffect recoder': \{\}, 'perfproc': \{\}\}
+            name = 'filter'
+        214                 \# Replace the transformer of the step with the fitted
+        215                 \# transformer. This is necessary when loading the transformer
+        216                 \# from the cache.
+        217                 self.steps[step\_idx] = (name, fitted\_transformer)
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/memory.py in \_\_call\_\_(self=NotMemorizedFunc(func=<function \_fit\_transform\_one at 0x7fe7be1ac7b8>), *args=(TransWrap(transformer=None, ytrans=True), None,              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object), **kwargs=\{\})
+        357     \# Should be a light as possible (for speed)
+        358     def \_\_init\_\_(self, func):
+        359         self.func = func
+        360 
+        361     def \_\_call\_\_(self, *args, **kwargs):
+    --> 362         return self.func(*args, **kwargs)
+            self.func = <function \_fit\_transform\_one>
+            args = (TransWrap(transformer=None, ytrans=True), None,              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object)
+            kwargs = \{\}
+        363 
+        364     def call\_and\_shelve(self, *args, **kwargs):
+        365         return NotMemorizedResult(self.func(*args, **kwargs))
+        366 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py in \_fit\_transform\_one(transformer=TransWrap(transformer=None, ytrans=True), weight=None, X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        576 
+        577 
+        578 def \_fit\_transform\_one(transformer, weight, X, y,
+        579                        **fit\_params):
+        580     if hasattr(transformer, 'fit\_transform'):
+    --> 581         res = transformer.fit\_transform(X, y, **fit\_params)
+            res = undefined
+            transformer.fit\_transform = <bound method TransformerMixin.fit\_transform of TransWrap(transformer=None, ytrans=True)>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+            fit\_params = \{\}
+        582     else:
+        583         res = transformer.fit(X, y, **fit\_params).transform(X)
+        584     \# if we have a weight for this transformer, multiply output
+        585     if weight is None:
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/base.py in fit\_transform(self=TransWrap(transformer=None, ytrans=True), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        515         if y is None:
+        516             \# fit method of arity 1 (unsupervised transformation)
+        517             return self.fit(X, **fit\_params).transform(X)
+        518         else:
+        519             \# fit method of arity 2 (supervised transformation)
+    --> 520             return self.fit(X, y, **fit\_params).transform(X)
+            self.fit = <bound method TransWrap.fit of TransWrap(transformer=None, ytrans=True)>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+            fit\_params.transform = undefined
+        521 
+        522 
+        523 class DensityMixin(object):
+        524     """Mixin class for all density estimators in scikit-learn."""
+    
+    {\ldots}
+    /home/andras/Projects/fs-ai/notebook/<ipython-input-17-a11be80f2199> in fit(self=TransWrap(transformer=None, ytrans=True), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object)
+         20             \#print(X.isna().any().any())
+         21             \#print(X)
+         22             self.trans.fit(X, self.y)
+         23         else:
+         24             \#print(X.isna().any().any())
+    ---> 25             self.trans.fit(X, y)
+         26         
+         27         return self
+         28 
+         29     def predict(self, X, y=None):
+    
+    AttributeError: 'NoneType' object has no attribute 'fit'
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+    """
+
+        
+    The above exception was the direct cause of the following exception:
+
+
+        TransportableException                    Traceback (most recent call last)
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in retrieve(self)
+        698                 if getattr(self.\_backend, 'supports\_timeout', False):
+    --> 699                     self.\_output.extend(job.get(timeout=self.timeout))
+        700                 else:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/multiprocessing/pool.py in get(self, timeout)
+        643         else:
+    --> 644             raise self.\_value
+        645 
+
+
+        TransportableException: TransportableException
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+    AttributeError                                     Tue Aug 21 17:06:48 2018
+    PID: 30193                  Python 3.6.6: /home/andras/anaconda3/bin/python
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_\_call\_\_(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+        126     def \_\_init\_\_(self, iterator\_slice):
+        127         self.items = list(iterator\_slice)
+        128         self.\_size = len(self.items)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+            self.items = [(<function \_fit\_and\_score>, (Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]),              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], 155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, \{'score': make\_scorer(accuracy\_score)\}, array([ 5679,  5680,  5681, {\ldots}, 17032, 17033, 17034]), array([   0,    1,    2, {\ldots}, 5676, 5677, 5678]), 0, None, None), \{'return\_times': True, 'return\_train\_score': False\})]
+        132 
+        133     def \_\_len\_\_(self):
+        134         return self.\_size
+        135 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list\_iterator object>)
+        126     def \_\_init\_\_(self, iterator\_slice):
+        127         self.items = list(iterator\_slice)
+        128         self.\_size = len(self.items)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+            func = <function \_fit\_and\_score>
+            args = (Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]),              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], 155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, \{'score': make\_scorer(accuracy\_score)\}, array([ 5679,  5680,  5681, {\ldots}, 17032, 17033, 17034]), array([   0,    1,    2, {\ldots}, 5676, 5677, 5678]), 0, None, None)
+            kwargs = \{'return\_times': True, 'return\_train\_score': False\}
+        132 
+        133     def \_\_len\_\_(self):
+        134         return self.\_size
+        135 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in \_fit\_and\_score(estimator=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], y=155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, scorer=\{'score': make\_scorer(accuracy\_score)\}, train=array([ 5679,  5680,  5681, {\ldots}, 17032, 17033, 17034]), test=array([   0,    1,    2, {\ldots}, 5676, 5677, 5678]), verbose=0, parameters=None, fit\_params=\{\}, return\_train\_score=False, return\_parameters=False, return\_n\_test\_samples=False, return\_times=True, error\_score='raise')
+        453 
+        454     try:
+        455         if y\_train is None:
+        456             estimator.fit(X\_train, **fit\_params)
+        457         else:
+    --> 458             estimator.fit(X\_train, y\_train, **fit\_params)
+            estimator.fit = <bound method Pipeline.fit of Pipeline(memory=No{\ldots}oc', TransWrap(transformer=None, ytrans=True))])>
+            X\_train =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y\_train = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+            fit\_params = \{\}
+        459 
+        460     except Exception as e:
+        461         \# Note fit time as time until error
+        462         fit\_time = time.time() - start\_time
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py in fit(self=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        243         Returns
+        244         -------
+        245         self : Pipeline
+        246             This estimator
+        247         """
+    --> 248         Xt, fit\_params = self.\_fit(X, y, **fit\_params)
+            Xt = undefined
+            fit\_params = \{\}
+            self.\_fit = <bound method Pipeline.\_fit of Pipeline(memory=N{\ldots}oc', TransWrap(transformer=None, ytrans=True))])>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+        249         if self.\_final\_estimator is not None:
+        250             self.\_final\_estimator.fit(Xt, y, **fit\_params)
+        251         return self
+        252 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py in \_fit(self=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        208                 else:
+        209                     cloned\_transformer = clone(transformer)
+        210                 \# Fit or load from cache the current transfomer
+        211                 Xt, fitted\_transformer = fit\_transform\_one\_cached(
+        212                     cloned\_transformer, None, Xt, y,
+    --> 213                     **fit\_params\_steps[name])
+            fit\_params\_steps = \{'filter': \{\}, 'naffect recoder': \{\}, 'perfproc': \{\}\}
+            name = 'filter'
+        214                 \# Replace the transformer of the step with the fitted
+        215                 \# transformer. This is necessary when loading the transformer
+        216                 \# from the cache.
+        217                 self.steps[step\_idx] = (name, fitted\_transformer)
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/memory.py in \_\_call\_\_(self=NotMemorizedFunc(func=<function \_fit\_transform\_one at 0x7fe7be1ac7b8>), *args=(TransWrap(transformer=None, ytrans=True), None,              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object), **kwargs=\{\})
+        357     \# Should be a light as possible (for speed)
+        358     def \_\_init\_\_(self, func):
+        359         self.func = func
+        360 
+        361     def \_\_call\_\_(self, *args, **kwargs):
+    --> 362         return self.func(*args, **kwargs)
+            self.func = <function \_fit\_transform\_one>
+            args = (TransWrap(transformer=None, ytrans=True), None,              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object)
+            kwargs = \{\}
+        363 
+        364     def call\_and\_shelve(self, *args, **kwargs):
+        365         return NotMemorizedResult(self.func(*args, **kwargs))
+        366 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py in \_fit\_transform\_one(transformer=TransWrap(transformer=None, ytrans=True), weight=None, X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        576 
+        577 
+        578 def \_fit\_transform\_one(transformer, weight, X, y,
+        579                        **fit\_params):
+        580     if hasattr(transformer, 'fit\_transform'):
+    --> 581         res = transformer.fit\_transform(X, y, **fit\_params)
+            res = undefined
+            transformer.fit\_transform = <bound method TransformerMixin.fit\_transform of TransWrap(transformer=None, ytrans=True)>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+            fit\_params = \{\}
+        582     else:
+        583         res = transformer.fit(X, y, **fit\_params).transform(X)
+        584     \# if we have a weight for this transformer, multiply output
+        585     if weight is None:
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/base.py in fit\_transform(self=TransWrap(transformer=None, ytrans=True), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        515         if y is None:
+        516             \# fit method of arity 1 (unsupervised transformation)
+        517             return self.fit(X, **fit\_params).transform(X)
+        518         else:
+        519             \# fit method of arity 2 (supervised transformation)
+    --> 520             return self.fit(X, y, **fit\_params).transform(X)
+            self.fit = <bound method TransWrap.fit of TransWrap(transformer=None, ytrans=True)>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+            fit\_params.transform = undefined
+        521 
+        522 
+        523 class DensityMixin(object):
+        524     """Mixin class for all density estimators in scikit-learn."""
+    
+    {\ldots}
+    /home/andras/Projects/fs-ai/notebook/<ipython-input-17-a11be80f2199> in fit(self=TransWrap(transformer=None, ytrans=True), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object)
+         20             \#print(X.isna().any().any())
+         21             \#print(X)
+         22             self.trans.fit(X, self.y)
+         23         else:
+         24             \#print(X.isna().any().any())
+    ---> 25             self.trans.fit(X, y)
+         26         
+         27         return self
+         28 
+         29     def predict(self, X, y=None):
+    
+    AttributeError: 'NoneType' object has no attribute 'fit'
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+        
+    During handling of the above exception, another exception occurred:
+
+
+        JoblibAttributeError                      Traceback (most recent call last)
+
+        <ipython-input-28-1acc040c3d6c> in <module>()
+    ----> 1 cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)
+    
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in cross\_val\_score(estimator, X, y, groups, scoring, cv, n\_jobs, verbose, fit\_params, pre\_dispatch)
+        340                                 n\_jobs=n\_jobs, verbose=verbose,
+        341                                 fit\_params=fit\_params,
+    --> 342                                 pre\_dispatch=pre\_dispatch)
+        343     return cv\_results['test\_score']
+        344 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in cross\_validate(estimator, X, y, groups, scoring, cv, n\_jobs, verbose, fit\_params, pre\_dispatch, return\_train\_score)
+        204             fit\_params, return\_train\_score=return\_train\_score,
+        205             return\_times=True)
+    --> 206         for train, test in cv.split(X, y, groups))
+        207 
+        208     if return\_train\_score:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_\_call\_\_(self, iterable)
+        787                 \# consumption.
+        788                 self.\_iterating = False
+    --> 789             self.retrieve()
+        790             \# Make sure that we get a last message telling us we are done
+        791             elapsed\_time = time.time() - self.\_start\_time
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in retrieve(self)
+        738                     exception = exception\_type(report)
+        739 
+    --> 740                     raise exception
+        741 
+        742     def \_\_call\_\_(self, iterable):
+
+
+        JoblibAttributeError: JoblibAttributeError
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+    Multiprocessing exception:
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/runpy.py in \_run\_module\_as\_main(mod\_name='ipykernel\_launcher', alter\_argv=1)
+        188         sys.exit(msg)
+        189     main\_globals = sys.modules["\_\_main\_\_"].\_\_dict\_\_
+        190     if alter\_argv:
+        191         sys.argv[0] = mod\_spec.origin
+        192     return \_run\_code(code, main\_globals, None,
+    --> 193                      "\_\_main\_\_", mod\_spec)
+            mod\_spec = ModuleSpec(name='ipykernel\_launcher', loader=<\_f{\ldots}b/python3.6/site-packages/ipykernel\_launcher.py')
+        194 
+        195 def run\_module(mod\_name, init\_globals=None,
+        196                run\_name=None, alter\_sys=False):
+        197     """Execute a module's code without importing it
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/runpy.py in \_run\_code(code=<code object <module> at 0x7fe80b8138a0, file "/{\ldots}3.6/site-packages/ipykernel\_launcher.py", line 5>, run\_globals=\{'\_\_annotations\_\_': \{\}, '\_\_builtins\_\_': <module 'builtins' (built-in)>, '\_\_cached\_\_': '/home/andras/anaconda3/lib/python3.6/site-packages/\_\_pycache\_\_/ipykernel\_launcher.cpython-36.pyc', '\_\_doc\_\_': 'Entry point for launching an IPython kernel.\textbackslash{}n\textbackslash{}nTh{\ldots}orts until\textbackslash{}nafter removing the cwd from sys.path.\textbackslash{}n', '\_\_file\_\_': '/home/andras/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py', '\_\_loader\_\_': <\_frozen\_importlib\_external.SourceFileLoader object>, '\_\_name\_\_': '\_\_main\_\_', '\_\_package\_\_': '', '\_\_spec\_\_': ModuleSpec(name='ipykernel\_launcher', loader=<\_f{\ldots}b/python3.6/site-packages/ipykernel\_launcher.py'), 'app': <module 'ipykernel.kernelapp' from '/home/andras{\ldots}/python3.6/site-packages/ipykernel/kernelapp.py'>, {\ldots}\}, init\_globals=None, mod\_name='\_\_main\_\_', mod\_spec=ModuleSpec(name='ipykernel\_launcher', loader=<\_f{\ldots}b/python3.6/site-packages/ipykernel\_launcher.py'), pkg\_name='', script\_name=None)
+         80                        \_\_cached\_\_ = cached,
+         81                        \_\_doc\_\_ = None,
+         82                        \_\_loader\_\_ = loader,
+         83                        \_\_package\_\_ = pkg\_name,
+         84                        \_\_spec\_\_ = mod\_spec)
+    ---> 85     exec(code, run\_globals)
+            code = <code object <module> at 0x7fe80b8138a0, file "/{\ldots}3.6/site-packages/ipykernel\_launcher.py", line 5>
+            run\_globals = \{'\_\_annotations\_\_': \{\}, '\_\_builtins\_\_': <module 'builtins' (built-in)>, '\_\_cached\_\_': '/home/andras/anaconda3/lib/python3.6/site-packages/\_\_pycache\_\_/ipykernel\_launcher.cpython-36.pyc', '\_\_doc\_\_': 'Entry point for launching an IPython kernel.\textbackslash{}n\textbackslash{}nTh{\ldots}orts until\textbackslash{}nafter removing the cwd from sys.path.\textbackslash{}n', '\_\_file\_\_': '/home/andras/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py', '\_\_loader\_\_': <\_frozen\_importlib\_external.SourceFileLoader object>, '\_\_name\_\_': '\_\_main\_\_', '\_\_package\_\_': '', '\_\_spec\_\_': ModuleSpec(name='ipykernel\_launcher', loader=<\_f{\ldots}b/python3.6/site-packages/ipykernel\_launcher.py'), 'app': <module 'ipykernel.kernelapp' from '/home/andras{\ldots}/python3.6/site-packages/ipykernel/kernelapp.py'>, {\ldots}\}
+         86     return run\_globals
+         87 
+         88 def \_run\_module\_code(code, init\_globals=None,
+         89                     mod\_name=None, mod\_spec=None,
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py in <module>()
+         11     \# This is added back by InteractiveShellApp.init\_path()
+         12     if sys.path[0] == '':
+         13         del sys.path[0]
+         14 
+         15     from ipykernel import kernelapp as app
+    ---> 16     app.launch\_new\_instance()
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/traitlets/config/application.py in launch\_instance(cls=<class 'ipykernel.kernelapp.IPKernelApp'>, argv=None, **kwargs=\{\})
+        653 
+        654         If a global instance already exists, this reinitializes and starts it
+        655         """
+        656         app = cls.instance(**kwargs)
+        657         app.initialize(argv)
+    --> 658         app.start()
+            app.start = <bound method IPKernelApp.start of <ipykernel.kernelapp.IPKernelApp object>>
+        659 
+        660 \#-----------------------------------------------------------------------------
+        661 \# utility functions, for convenience
+        662 \#-----------------------------------------------------------------------------
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/ipykernel/kernelapp.py in start(self=<ipykernel.kernelapp.IPKernelApp object>)
+        481         if self.poller is not None:
+        482             self.poller.start()
+        483         self.kernel.start()
+        484         self.io\_loop = ioloop.IOLoop.current()
+        485         try:
+    --> 486             self.io\_loop.start()
+            self.io\_loop.start = <bound method BaseAsyncIOLoop.start of <tornado.platform.asyncio.AsyncIOMainLoop object>>
+        487         except KeyboardInterrupt:
+        488             pass
+        489 
+        490 launch\_new\_instance = IPKernelApp.launch\_instance
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/tornado/platform/asyncio.py in start(self=<tornado.platform.asyncio.AsyncIOMainLoop object>)
+        122         except (RuntimeError, AssertionError):
+        123             old\_loop = None
+        124         try:
+        125             self.\_setup\_logging()
+        126             asyncio.set\_event\_loop(self.asyncio\_loop)
+    --> 127             self.asyncio\_loop.run\_forever()
+            self.asyncio\_loop.run\_forever = <bound method BaseEventLoop.run\_forever of <\_Uni{\ldots}EventLoop running=True closed=False debug=False>>
+        128         finally:
+        129             asyncio.set\_event\_loop(old\_loop)
+        130 
+        131     def stop(self):
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/asyncio/base\_events.py in run\_forever(self=<\_UnixSelectorEventLoop running=True closed=False debug=False>)
+        417             sys.set\_asyncgen\_hooks(firstiter=self.\_asyncgen\_firstiter\_hook,
+        418                                    finalizer=self.\_asyncgen\_finalizer\_hook)
+        419         try:
+        420             events.\_set\_running\_loop(self)
+        421             while True:
+    --> 422                 self.\_run\_once()
+            self.\_run\_once = <bound method BaseEventLoop.\_run\_once of <\_UnixS{\ldots}EventLoop running=True closed=False debug=False>>
+        423                 if self.\_stopping:
+        424                     break
+        425         finally:
+        426             self.\_stopping = False
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/asyncio/base\_events.py in \_run\_once(self=<\_UnixSelectorEventLoop running=True closed=False debug=False>)
+       1429                         logger.warning('Executing \%s took \%.3f seconds',
+       1430                                        \_format\_handle(handle), dt)
+       1431                 finally:
+       1432                     self.\_current\_handle = None
+       1433             else:
+    -> 1434                 handle.\_run()
+            handle.\_run = <bound method Handle.\_run of <Handle BaseAsyncIOLoop.\_handle\_events(11, 1)>>
+       1435         handle = None  \# Needed to break cycles when an exception occurs.
+       1436 
+       1437     def \_set\_coroutine\_wrapper(self, enabled):
+       1438         try:
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/asyncio/events.py in \_run(self=<Handle BaseAsyncIOLoop.\_handle\_events(11, 1)>)
+        140             self.\_callback = None
+        141             self.\_args = None
+        142 
+        143     def \_run(self):
+        144         try:
+    --> 145             self.\_callback(*self.\_args)
+            self.\_callback = <bound method BaseAsyncIOLoop.\_handle\_events of <tornado.platform.asyncio.AsyncIOMainLoop object>>
+            self.\_args = (11, 1)
+        146         except Exception as exc:
+        147             cb = \_format\_callback\_source(self.\_callback, self.\_args)
+        148             msg = 'Exception in callback \{\}'.format(cb)
+        149             context = \{
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/tornado/platform/asyncio.py in \_handle\_events(self=<tornado.platform.asyncio.AsyncIOMainLoop object>, fd=11, events=1)
+        112             self.writers.remove(fd)
+        113         del self.handlers[fd]
+        114 
+        115     def \_handle\_events(self, fd, events):
+        116         fileobj, handler\_func = self.handlers[fd]
+    --> 117         handler\_func(fileobj, events)
+            handler\_func = <function wrap.<locals>.null\_wrapper>
+            fileobj = <zmq.sugar.socket.Socket object>
+            events = 1
+        118 
+        119     def start(self):
+        120         try:
+        121             old\_loop = asyncio.get\_event\_loop()
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/tornado/stack\_context.py in null\_wrapper(*args=(<zmq.sugar.socket.Socket object>, 1), **kwargs=\{\})
+        271         \# Fast path when there are no active contexts.
+        272         def null\_wrapper(*args, **kwargs):
+        273             try:
+        274                 current\_state = \_state.contexts
+        275                 \_state.contexts = cap\_contexts[0]
+    --> 276                 return fn(*args, **kwargs)
+            args = (<zmq.sugar.socket.Socket object>, 1)
+            kwargs = \{\}
+        277             finally:
+        278                 \_state.contexts = current\_state
+        279         null\_wrapper.\_wrapped = True
+        280         return null\_wrapper
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/zmq/eventloop/zmqstream.py in \_handle\_events(self=<zmq.eventloop.zmqstream.ZMQStream object>, fd=<zmq.sugar.socket.Socket object>, events=1)
+        445             return
+        446         zmq\_events = self.socket.EVENTS
+        447         try:
+        448             \# dispatch events:
+        449             if zmq\_events \& zmq.POLLIN and self.receiving():
+    --> 450                 self.\_handle\_recv()
+            self.\_handle\_recv = <bound method ZMQStream.\_handle\_recv of <zmq.eventloop.zmqstream.ZMQStream object>>
+        451                 if not self.socket:
+        452                     return
+        453             if zmq\_events \& zmq.POLLOUT and self.sending():
+        454                 self.\_handle\_send()
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/zmq/eventloop/zmqstream.py in \_handle\_recv(self=<zmq.eventloop.zmqstream.ZMQStream object>)
+        475             else:
+        476                 raise
+        477         else:
+        478             if self.\_recv\_callback:
+        479                 callback = self.\_recv\_callback
+    --> 480                 self.\_run\_callback(callback, msg)
+            self.\_run\_callback = <bound method ZMQStream.\_run\_callback of <zmq.eventloop.zmqstream.ZMQStream object>>
+            callback = <function wrap.<locals>.null\_wrapper>
+            msg = [<zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>]
+        481         
+        482 
+        483     def \_handle\_send(self):
+        484         """Handle a send event."""
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/zmq/eventloop/zmqstream.py in \_run\_callback(self=<zmq.eventloop.zmqstream.ZMQStream object>, callback=<function wrap.<locals>.null\_wrapper>, *args=([<zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>],), **kwargs=\{\})
+        427         close our socket."""
+        428         try:
+        429             \# Use a NullContext to ensure that all StackContexts are run
+        430             \# inside our blanket exception handler rather than outside.
+        431             with stack\_context.NullContext():
+    --> 432                 callback(*args, **kwargs)
+            callback = <function wrap.<locals>.null\_wrapper>
+            args = ([<zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>],)
+            kwargs = \{\}
+        433         except:
+        434             gen\_log.error("Uncaught exception in ZMQStream callback",
+        435                           exc\_info=True)
+        436             \# Re-raise the exception so that IOLoop.handle\_callback\_exception
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/tornado/stack\_context.py in null\_wrapper(*args=([<zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>],), **kwargs=\{\})
+        271         \# Fast path when there are no active contexts.
+        272         def null\_wrapper(*args, **kwargs):
+        273             try:
+        274                 current\_state = \_state.contexts
+        275                 \_state.contexts = cap\_contexts[0]
+    --> 276                 return fn(*args, **kwargs)
+            args = ([<zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>],)
+            kwargs = \{\}
+        277             finally:
+        278                 \_state.contexts = current\_state
+        279         null\_wrapper.\_wrapped = True
+        280         return null\_wrapper
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/ipykernel/kernelbase.py in dispatcher(msg=[<zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>])
+        278         if self.control\_stream:
+        279             self.control\_stream.on\_recv(self.dispatch\_control, copy=False)
+        280 
+        281         def make\_dispatcher(stream):
+        282             def dispatcher(msg):
+    --> 283                 return self.dispatch\_shell(stream, msg)
+            msg = [<zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>, <zmq.sugar.frame.Frame object>]
+        284             return dispatcher
+        285 
+        286         for s in self.shell\_streams:
+        287             s.on\_recv(make\_dispatcher(s), copy=False)
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/ipykernel/kernelbase.py in dispatch\_shell(self=<ipykernel.ipkernel.IPythonKernel object>, stream=<zmq.eventloop.zmqstream.ZMQStream object>, msg=\{'buffers': [], 'content': \{'allow\_stdin': True, 'code': 'cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)', 'silent': False, 'stop\_on\_error': True, 'store\_history': True, 'user\_expressions': \{\}\}, 'header': \{'date': datetime.datetime(2018, 8, 21, 15, 6, 47, 128290, tzinfo=tzutc()), 'msg\_id': 'd270c22730b04ca98bfe574f9cd99c9d', 'msg\_type': 'execute\_request', 'session': '99ed435b79b4418983ced00877b5c862', 'username': 'username', 'version': '5.2'\}, 'metadata': \{\}, 'msg\_id': 'd270c22730b04ca98bfe574f9cd99c9d', 'msg\_type': 'execute\_request', 'parent\_header': \{\}\})
+        228             self.log.warn("Unknown message type: \%r", msg\_type)
+        229         else:
+        230             self.log.debug("\%s: \%s", msg\_type, msg)
+        231             self.pre\_handler\_hook()
+        232             try:
+    --> 233                 handler(stream, idents, msg)
+            handler = <bound method Kernel.execute\_request of <ipykernel.ipkernel.IPythonKernel object>>
+            stream = <zmq.eventloop.zmqstream.ZMQStream object>
+            idents = [b'99ed435b79b4418983ced00877b5c862']
+            msg = \{'buffers': [], 'content': \{'allow\_stdin': True, 'code': 'cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)', 'silent': False, 'stop\_on\_error': True, 'store\_history': True, 'user\_expressions': \{\}\}, 'header': \{'date': datetime.datetime(2018, 8, 21, 15, 6, 47, 128290, tzinfo=tzutc()), 'msg\_id': 'd270c22730b04ca98bfe574f9cd99c9d', 'msg\_type': 'execute\_request', 'session': '99ed435b79b4418983ced00877b5c862', 'username': 'username', 'version': '5.2'\}, 'metadata': \{\}, 'msg\_id': 'd270c22730b04ca98bfe574f9cd99c9d', 'msg\_type': 'execute\_request', 'parent\_header': \{\}\}
+        234             except Exception:
+        235                 self.log.error("Exception in message handler:", exc\_info=True)
+        236             finally:
+        237                 self.post\_handler\_hook()
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/ipykernel/kernelbase.py in execute\_request(self=<ipykernel.ipkernel.IPythonKernel object>, stream=<zmq.eventloop.zmqstream.ZMQStream object>, ident=[b'99ed435b79b4418983ced00877b5c862'], parent=\{'buffers': [], 'content': \{'allow\_stdin': True, 'code': 'cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)', 'silent': False, 'stop\_on\_error': True, 'store\_history': True, 'user\_expressions': \{\}\}, 'header': \{'date': datetime.datetime(2018, 8, 21, 15, 6, 47, 128290, tzinfo=tzutc()), 'msg\_id': 'd270c22730b04ca98bfe574f9cd99c9d', 'msg\_type': 'execute\_request', 'session': '99ed435b79b4418983ced00877b5c862', 'username': 'username', 'version': '5.2'\}, 'metadata': \{\}, 'msg\_id': 'd270c22730b04ca98bfe574f9cd99c9d', 'msg\_type': 'execute\_request', 'parent\_header': \{\}\})
+        394         if not silent:
+        395             self.execution\_count += 1
+        396             self.\_publish\_execute\_input(code, parent, self.execution\_count)
+        397 
+        398         reply\_content = self.do\_execute(code, silent, store\_history,
+    --> 399                                         user\_expressions, allow\_stdin)
+            user\_expressions = \{\}
+            allow\_stdin = True
+        400 
+        401         \# Flush output before sending the reply.
+        402         sys.stdout.flush()
+        403         sys.stderr.flush()
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/ipykernel/ipkernel.py in do\_execute(self=<ipykernel.ipkernel.IPythonKernel object>, code='cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)', silent=False, store\_history=True, user\_expressions=\{\}, allow\_stdin=True)
+        203 
+        204         self.\_forward\_input(allow\_stdin)
+        205 
+        206         reply\_content = \{\}
+        207         try:
+    --> 208             res = shell.run\_cell(code, store\_history=store\_history, silent=silent)
+            res = undefined
+            shell.run\_cell = <bound method ZMQInteractiveShell.run\_cell of <ipykernel.zmqshell.ZMQInteractiveShell object>>
+            code = 'cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)'
+            store\_history = True
+            silent = False
+        209         finally:
+        210             self.\_restore\_input()
+        211 
+        212         if res.error\_before\_exec is not None:
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/ipykernel/zmqshell.py in run\_cell(self=<ipykernel.zmqshell.ZMQInteractiveShell object>, *args=('cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)',), **kwargs=\{'silent': False, 'store\_history': True\})
+        532             )
+        533         self.payload\_manager.write\_payload(payload)
+        534 
+        535     def run\_cell(self, *args, **kwargs):
+        536         self.\_last\_traceback = None
+    --> 537         return super(ZMQInteractiveShell, self).run\_cell(*args, **kwargs)
+            self.run\_cell = <bound method ZMQInteractiveShell.run\_cell of <ipykernel.zmqshell.ZMQInteractiveShell object>>
+            args = ('cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)',)
+            kwargs = \{'silent': False, 'store\_history': True\}
+        538 
+        539     def \_showtraceback(self, etype, evalue, stb):
+        540         \# try to preserve ordering of tracebacks and print statements
+        541         sys.stdout.flush()
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/IPython/core/interactiveshell.py in run\_cell(self=<ipykernel.zmqshell.ZMQInteractiveShell object>, raw\_cell='cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)', store\_history=True, silent=False, shell\_futures=True)
+       2657         -------
+       2658         result : :class:`ExecutionResult`
+       2659         """
+       2660         try:
+       2661             result = self.\_run\_cell(
+    -> 2662                 raw\_cell, store\_history, silent, shell\_futures)
+            raw\_cell = 'cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)'
+            store\_history = True
+            silent = False
+            shell\_futures = True
+       2663         finally:
+       2664             self.events.trigger('post\_execute')
+       2665             if not silent:
+       2666                 self.events.trigger('post\_run\_cell', result)
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/IPython/core/interactiveshell.py in \_run\_cell(self=<ipykernel.zmqshell.ZMQInteractiveShell object>, raw\_cell='cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)', store\_history=True, silent=False, shell\_futures=True)
+       2780                 self.displayhook.exec\_result = result
+       2781 
+       2782                 \# Execute the user code
+       2783                 interactivity = 'none' if silent else self.ast\_node\_interactivity
+       2784                 has\_raised = self.run\_ast\_nodes(code\_ast.body, cell\_name,
+    -> 2785                    interactivity=interactivity, compiler=compiler, result=result)
+            interactivity = 'last\_expr'
+            compiler = <IPython.core.compilerop.CachingCompiler object>
+       2786                 
+       2787                 self.last\_execution\_succeeded = not has\_raised
+       2788                 self.last\_execution\_result = result
+       2789 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/IPython/core/interactiveshell.py in run\_ast\_nodes(self=<ipykernel.zmqshell.ZMQInteractiveShell object>, nodelist=[<\_ast.Expr object>], cell\_name='<ipython-input-28-1acc040c3d6c>', interactivity='last', compiler=<IPython.core.compilerop.CachingCompiler object>, result=<ExecutionResult object at 7fe7c0f020b8, executi{\ldots}rue silent=False shell\_futures=True> result=None>)
+       2904                     return True
+       2905 
+       2906             for i, node in enumerate(to\_run\_interactive):
+       2907                 mod = ast.Interactive([node])
+       2908                 code = compiler(mod, cell\_name, "single")
+    -> 2909                 if self.run\_code(code, result):
+            self.run\_code = <bound method InteractiveShell.run\_code of <ipykernel.zmqshell.ZMQInteractiveShell object>>
+            code = <code object <module> at 0x7fe7bee32300, file "<ipython-input-28-1acc040c3d6c>", line 1>
+            result = <ExecutionResult object at 7fe7c0f020b8, executi{\ldots}rue silent=False shell\_futures=True> result=None>
+       2910                     return True
+       2911 
+       2912             \# Flush softspace
+       2913             if softspace(sys.stdout, 0):
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/IPython/core/interactiveshell.py in run\_code(self=<ipykernel.zmqshell.ZMQInteractiveShell object>, code\_obj=<code object <module> at 0x7fe7bee32300, file "<ipython-input-28-1acc040c3d6c>", line 1>, result=<ExecutionResult object at 7fe7c0f020b8, executi{\ldots}rue silent=False shell\_futures=True> result=None>)
+       2958         outflag = True  \# happens in more places, so it's easier as default
+       2959         try:
+       2960             try:
+       2961                 self.hooks.pre\_run\_code\_hook()
+       2962                 \#rprint('Running code', repr(code\_obj)) \# dbg
+    -> 2963                 exec(code\_obj, self.user\_global\_ns, self.user\_ns)
+            code\_obj = <code object <module> at 0x7fe7bee32300, file "<ipython-input-28-1acc040c3d6c>", line 1>
+            self.user\_global\_ns = \{'BaseEstimator': <class 'sklearn.base.BaseEstimator'>, 'CodeMergeNaff': <class '\_\_main\_\_.CodeMergeNaff'>, 'DecisionTreeClassifier': <class 'sklearn.tree.tree.DecisionTreeClassifier'>, 'GTDFilter': <class '\_\_main\_\_.GTDFilter'>, 'GaussianNB': <class 'sklearn.naive\_bayes.GaussianNB'>, 'In': ['', "get\_ipython().run\_line\_magic('clear', '')", 'import pandas as pd\textbackslash{}nimport numpy as np', 'from sklearn.preprocessing import LabelEncoder\textbackslash{}nf{\ldots} import SMOTE\textbackslash{}nfrom scipy.sparse import csr\_matrix', 'from sklearn.model\_selection import train\_test\_s{\ldots}validate, StratifiedKFold, StratifiedShuffleSplit', 'from sklearn.tree import DecisionTreeClassifier\textbackslash{}n{\ldots}om sklearn.linear\_model import LogisticRegression', 'from sklearn.metrics import accuracy\_score, precision\_score, classification\_report, roc\_auc\_score', "get\_ipython().run\_line\_magic('env', 'JOBLIB\_TEMP\_FOLDER=/tmp')", 'import gc', '\# Instead of the excel from their homepage, I us{\ldots}terrorismdb\_0617dist.csv", encoding=\textbackslash{}'ISO-8859-1\textbackslash{}')', '\# In case we want to use a sample\textbackslash{}n\# gtd\_ori = gtd\textbackslash{}ngtd = gtd.sample(frac=0.1)', 'from sklearn.pipeline import Pipeline\textbackslash{}nfrom sklearn.base import TransformerMixin , BaseEstimator', "steps\_in\_val\_dict = \{\textbackslash{}n    'Set location': [1, 1,{\ldots}\_x', 'train\_y', 'val\_x', 'val\_y')).T\textbackslash{}nsteps\_in\_val", 'def showXy(X, y=None):\textbackslash{}n        if isinstance(X, {\ldots}  \#print("self.y.shape: \{\}".format(self.y.shape))', 'class CodeMergeNaff(TransformerMixin, BaseEstima{\ldots}t("CodeMergeNaff transform END")\textbackslash{}n        return X', 'class ProcPerf(TransformerMixin, BaseEstimator):{\ldots}lf.y.shape))\textbackslash{}n                \textbackslash{}n        return X, y', 'class GTDFilter(TransformerMixin, BaseEstimator){\ldots}                \textbackslash{}n        return X, y \#self.y\_work', 'class TransWrap(TransformerMixin, BaseEstimator){\ldots}format(new\_y.shape))\textbackslash{}n\textbackslash{}n        return new\_X, new\_y', "crits = \{'nkill': (62, 124, 'abc'), \textbackslash{}n         'n{\ldots} 'def'), \textbackslash{}n         'nhostkid': (400, 800, 'ghi')\}", "pipe = Pipeline([\textbackslash{}n    ('filter', TransWrap(\textbackslash{}n    {\ldots}\#('DTC', TransWrap(DecisionTreeClassifier())),\textbackslash{}n])", {\ldots}], 'KFold': <class 'sklearn.model\_selection.\_split.KFold'>, 'KNeighborsClassifier': <class 'sklearn.neighbors.classification.KNeighborsClassifier'>, 'LabelEncoder': <class 'sklearn.preprocessing.label.LabelEncoder'>, 'LinearDiscriminantAnalysis': <class 'sklearn.discriminant\_analysis.LinearDiscriminantAnalysis'>, {\ldots}\}
+            self.user\_ns = \{'BaseEstimator': <class 'sklearn.base.BaseEstimator'>, 'CodeMergeNaff': <class '\_\_main\_\_.CodeMergeNaff'>, 'DecisionTreeClassifier': <class 'sklearn.tree.tree.DecisionTreeClassifier'>, 'GTDFilter': <class '\_\_main\_\_.GTDFilter'>, 'GaussianNB': <class 'sklearn.naive\_bayes.GaussianNB'>, 'In': ['', "get\_ipython().run\_line\_magic('clear', '')", 'import pandas as pd\textbackslash{}nimport numpy as np', 'from sklearn.preprocessing import LabelEncoder\textbackslash{}nf{\ldots} import SMOTE\textbackslash{}nfrom scipy.sparse import csr\_matrix', 'from sklearn.model\_selection import train\_test\_s{\ldots}validate, StratifiedKFold, StratifiedShuffleSplit', 'from sklearn.tree import DecisionTreeClassifier\textbackslash{}n{\ldots}om sklearn.linear\_model import LogisticRegression', 'from sklearn.metrics import accuracy\_score, precision\_score, classification\_report, roc\_auc\_score', "get\_ipython().run\_line\_magic('env', 'JOBLIB\_TEMP\_FOLDER=/tmp')", 'import gc', '\# Instead of the excel from their homepage, I us{\ldots}terrorismdb\_0617dist.csv", encoding=\textbackslash{}'ISO-8859-1\textbackslash{}')', '\# In case we want to use a sample\textbackslash{}n\# gtd\_ori = gtd\textbackslash{}ngtd = gtd.sample(frac=0.1)', 'from sklearn.pipeline import Pipeline\textbackslash{}nfrom sklearn.base import TransformerMixin , BaseEstimator', "steps\_in\_val\_dict = \{\textbackslash{}n    'Set location': [1, 1,{\ldots}\_x', 'train\_y', 'val\_x', 'val\_y')).T\textbackslash{}nsteps\_in\_val", 'def showXy(X, y=None):\textbackslash{}n        if isinstance(X, {\ldots}  \#print("self.y.shape: \{\}".format(self.y.shape))', 'class CodeMergeNaff(TransformerMixin, BaseEstima{\ldots}t("CodeMergeNaff transform END")\textbackslash{}n        return X', 'class ProcPerf(TransformerMixin, BaseEstimator):{\ldots}lf.y.shape))\textbackslash{}n                \textbackslash{}n        return X, y', 'class GTDFilter(TransformerMixin, BaseEstimator){\ldots}                \textbackslash{}n        return X, y \#self.y\_work', 'class TransWrap(TransformerMixin, BaseEstimator){\ldots}format(new\_y.shape))\textbackslash{}n\textbackslash{}n        return new\_X, new\_y', "crits = \{'nkill': (62, 124, 'abc'), \textbackslash{}n         'n{\ldots} 'def'), \textbackslash{}n         'nhostkid': (400, 800, 'ghi')\}", "pipe = Pipeline([\textbackslash{}n    ('filter', TransWrap(\textbackslash{}n    {\ldots}\#('DTC', TransWrap(DecisionTreeClassifier())),\textbackslash{}n])", {\ldots}], 'KFold': <class 'sklearn.model\_selection.\_split.KFold'>, 'KNeighborsClassifier': <class 'sklearn.neighbors.classification.KNeighborsClassifier'>, 'LabelEncoder': <class 'sklearn.preprocessing.label.LabelEncoder'>, 'LinearDiscriminantAnalysis': <class 'sklearn.discriminant\_analysis.LinearDiscriminantAnalysis'>, {\ldots}\}
+       2964             finally:
+       2965                 \# Reset our crash handler in place
+       2966                 sys.excepthook = old\_excepthook
+       2967         except SystemExit as e:
+    
+    {\ldots}
+    /home/andras/Projects/fs-ai/notebook/<ipython-input-28-1acc040c3d6c> in <module>()
+    ----> 1 cross\_val\_score(estimator=pipe, X=X, y=y, scoring=scoring, cv=cv, n\_jobs=n\_jobs)
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in cross\_val\_score(estimator=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], y=155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, groups=None, scoring='accuracy', cv=3, n\_jobs=-1, verbose=0, fit\_params=None, pre\_dispatch='2*n\_jobs')
+        337     cv\_results = cross\_validate(estimator=estimator, X=X, y=y, groups=groups,
+        338                                 scoring=\{'score': scorer\}, cv=cv,
+        339                                 return\_train\_score=False,
+        340                                 n\_jobs=n\_jobs, verbose=verbose,
+        341                                 fit\_params=fit\_params,
+    --> 342                                 pre\_dispatch=pre\_dispatch)
+            pre\_dispatch = '2*n\_jobs'
+        343     return cv\_results['test\_score']
+        344 
+        345 
+        346 def \_fit\_and\_score(estimator, X, y, scorer, train, test, verbose,
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in cross\_validate(estimator=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], y=155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, groups=None, scoring=\{'score': make\_scorer(accuracy\_score)\}, cv=KFold(n\_splits=3, random\_state=None, shuffle=False), n\_jobs=-1, verbose=0, fit\_params=None, pre\_dispatch='2*n\_jobs', return\_train\_score=False)
+        201     scores = parallel(
+        202         delayed(\_fit\_and\_score)(
+        203             clone(estimator), X, y, scorers, train, test, verbose, None,
+        204             fit\_params, return\_train\_score=return\_train\_score,
+        205             return\_times=True)
+    --> 206         for train, test in cv.split(X, y, groups))
+            cv.split = <bound method \_BaseKFold.split of KFold(n\_splits=3, random\_state=None, shuffle=False)>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns]
+            y = 155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object
+            groups = None
+        207 
+        208     if return\_train\_score:
+        209         train\_scores, test\_scores, fit\_times, score\_times = zip(*scores)
+        210         train\_scores = \_aggregate\_score\_dicts(train\_scores)
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_\_call\_\_(self=Parallel(n\_jobs=-1), iterable=<generator object cross\_validate.<locals>.<genexpr>>)
+        784             if pre\_dispatch == "all" or n\_jobs == 1:
+        785                 \# The iterable was consumed all at once by the above for loop.
+        786                 \# No need to wait for async callbacks to trigger to
+        787                 \# consumption.
+        788                 self.\_iterating = False
+    --> 789             self.retrieve()
+            self.retrieve = <bound method Parallel.retrieve of Parallel(n\_jobs=-1)>
+        790             \# Make sure that we get a last message telling us we are done
+        791             elapsed\_time = time.time() - self.\_start\_time
+        792             self.\_print('Done \%3i out of \%3i | elapsed: \%s finished',
+        793                         (len(self.\_output), len(self.\_output),
+    
+    ---------------------------------------------------------------------------
+    Sub-process traceback:
+    ---------------------------------------------------------------------------
+    AttributeError                                     Tue Aug 21 17:06:48 2018
+    PID: 30193                  Python 3.6.6: /home/andras/anaconda3/bin/python
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in \_\_call\_\_(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+        126     def \_\_init\_\_(self, iterator\_slice):
+        127         self.items = list(iterator\_slice)
+        128         self.\_size = len(self.items)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+            self.items = [(<function \_fit\_and\_score>, (Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]),              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], 155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, \{'score': make\_scorer(accuracy\_score)\}, array([ 5679,  5680,  5681, {\ldots}, 17032, 17033, 17034]), array([   0,    1,    2, {\ldots}, 5676, 5677, 5678]), 0, None, None), \{'return\_times': True, 'return\_train\_score': False\})]
+        132 
+        133     def \_\_len\_\_(self):
+        134         return self.\_size
+        135 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list\_iterator object>)
+        126     def \_\_init\_\_(self, iterator\_slice):
+        127         self.items = list(iterator\_slice)
+        128         self.\_size = len(self.items)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+            func = <function \_fit\_and\_score>
+            args = (Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]),              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], 155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, \{'score': make\_scorer(accuracy\_score)\}, array([ 5679,  5680,  5681, {\ldots}, 17032, 17033, 17034]), array([   0,    1,    2, {\ldots}, 5676, 5677, 5678]), 0, None, None)
+            kwargs = \{'return\_times': True, 'return\_train\_score': False\}
+        132 
+        133     def \_\_len\_\_(self):
+        134         return self.\_size
+        135 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/model\_selection/\_validation.py in \_fit\_and\_score(estimator=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [17035 rows x 134 columns], y=155700                                          {\ldots}Unknown
+    Name: gname, Length: 17035, dtype: object, scorer=\{'score': make\_scorer(accuracy\_score)\}, train=array([ 5679,  5680,  5681, {\ldots}, 17032, 17033, 17034]), test=array([   0,    1,    2, {\ldots}, 5676, 5677, 5678]), verbose=0, parameters=None, fit\_params=\{\}, return\_train\_score=False, return\_parameters=False, return\_n\_test\_samples=False, return\_times=True, error\_score='raise')
+        453 
+        454     try:
+        455         if y\_train is None:
+        456             estimator.fit(X\_train, **fit\_params)
+        457         else:
+    --> 458             estimator.fit(X\_train, y\_train, **fit\_params)
+            estimator.fit = <bound method Pipeline.fit of Pipeline(memory=No{\ldots}oc', TransWrap(transformer=None, ytrans=True))])>
+            X\_train =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y\_train = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+            fit\_params = \{\}
+        459 
+        460     except Exception as e:
+        461         \# Note fit time as time until error
+        462         fit\_time = time.time() - start\_time
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py in fit(self=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        243         Returns
+        244         -------
+        245         self : Pipeline
+        246             This estimator
+        247         """
+    --> 248         Xt, fit\_params = self.\_fit(X, y, **fit\_params)
+            Xt = undefined
+            fit\_params = \{\}
+            self.\_fit = <bound method Pipeline.\_fit of Pipeline(memory=N{\ldots}oc', TransWrap(transformer=None, ytrans=True))])>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+        249         if self.\_final\_estimator is not None:
+        250             self.\_final\_estimator.fit(Xt, y, **fit\_params)
+        251         return self
+        252 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py in \_fit(self=Pipeline(memory=None,
+         steps=[('filter', Tra{\ldots}roc', TransWrap(transformer=None, ytrans=True))]), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        208                 else:
+        209                     cloned\_transformer = clone(transformer)
+        210                 \# Fit or load from cache the current transfomer
+        211                 Xt, fitted\_transformer = fit\_transform\_one\_cached(
+        212                     cloned\_transformer, None, Xt, y,
+    --> 213                     **fit\_params\_steps[name])
+            fit\_params\_steps = \{'filter': \{\}, 'naffect recoder': \{\}, 'perfproc': \{\}\}
+            name = 'filter'
+        214                 \# Replace the transformer of the step with the fitted
+        215                 \# transformer. This is necessary when loading the transformer
+        216                 \# from the cache.
+        217                 self.steps[step\_idx] = (name, fitted\_transformer)
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/memory.py in \_\_call\_\_(self=NotMemorizedFunc(func=<function \_fit\_transform\_one at 0x7fe7be1ac7b8>), *args=(TransWrap(transformer=None, ytrans=True), None,              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object), **kwargs=\{\})
+        357     \# Should be a light as possible (for speed)
+        358     def \_\_init\_\_(self, func):
+        359         self.func = func
+        360 
+        361     def \_\_call\_\_(self, *args, **kwargs):
+    --> 362         return self.func(*args, **kwargs)
+            self.func = <function \_fit\_transform\_one>
+            args = (TransWrap(transformer=None, ytrans=True), None,              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object)
+            kwargs = \{\}
+        363 
+        364     def call\_and\_shelve(self, *args, **kwargs):
+        365         return NotMemorizedResult(self.func(*args, **kwargs))
+        366 
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py in \_fit\_transform\_one(transformer=TransWrap(transformer=None, ytrans=True), weight=None, X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        576 
+        577 
+        578 def \_fit\_transform\_one(transformer, weight, X, y,
+        579                        **fit\_params):
+        580     if hasattr(transformer, 'fit\_transform'):
+    --> 581         res = transformer.fit\_transform(X, y, **fit\_params)
+            res = undefined
+            transformer.fit\_transform = <bound method TransformerMixin.fit\_transform of TransWrap(transformer=None, ytrans=True)>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+            fit\_params = \{\}
+        582     else:
+        583         res = transformer.fit(X, y, **fit\_params).transform(X)
+        584     \# if we have a weight for this transformer, multiply output
+        585     if weight is None:
+    
+    {\ldots}
+    /home/andras/anaconda3/lib/python3.6/site-packages/sklearn/base.py in fit\_transform(self=TransWrap(transformer=None, ytrans=True), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object, **fit\_params=\{\})
+        515         if y is None:
+        516             \# fit method of arity 1 (unsupervised transformation)
+        517             return self.fit(X, **fit\_params).transform(X)
+        518         else:
+        519             \# fit method of arity 2 (supervised transformation)
+    --> 520             return self.fit(X, y, **fit\_params).transform(X)
+            self.fit = <bound method TransWrap.fit of TransWrap(transformer=None, ytrans=True)>
+            X =              eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns]
+            y = 44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object
+            fit\_params.transform = undefined
+        521 
+        522 
+        523 class DensityMixin(object):
+        524     """Mixin class for all density estimators in scikit-learn."""
+    
+    {\ldots}
+    /home/andras/Projects/fs-ai/notebook/<ipython-input-17-a11be80f2199> in fit(self=TransWrap(transformer=None, ytrans=True), X=             eventid  iyear  imonth  iday       {\ldots}                NaN  
+    
+    [11356 rows x 134 columns], y=44460                                           {\ldots}Unknown
+    Name: gname, Length: 11356, dtype: object)
+         20             \#print(X.isna().any().any())
+         21             \#print(X)
+         22             self.trans.fit(X, self.y)
+         23         else:
+         24             \#print(X.isna().any().any())
+    ---> 25             self.trans.fit(X, y)
+         26         
+         27         return self
+         28 
+         29     def predict(self, X, y=None):
+    
+    AttributeError: 'NoneType' object has no attribute 'fit'
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
